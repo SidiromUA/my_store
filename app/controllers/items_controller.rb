@@ -1,11 +1,15 @@
 class ItemsController < ApplicationController
+  
+  before_action :find_item, only: %i[show edit update destroy]
+  before_action :check_if_admin, only: %i[edit update new create destroy]
+  
   def index
-    @items = Item.all 
+    @items = Item.all
   end
 
   # items/1 GET
   def show
-    unless @item = Item.where(id: params[:id]).first
+    unless @item
       render plain: 'Page is not found', status: 404
     end
   end
@@ -16,9 +20,7 @@ class ItemsController < ApplicationController
   end
 
   # items/1/edit GET
-  def edit
-    @item = Item.find(params[:id])
-  end
+  def edit; end
 
   # items POST
   def create
@@ -26,29 +28,39 @@ class ItemsController < ApplicationController
     @item.save
     if @item
       redirect_to item_path(@item)
-    else 
-      render "new"
+    else
+      render 'new'
     end
   end
 
   # items/1 PUT
   def update
-    @item = Item.find(params[:id])
     @item.update_attributes(item_params)
     @item.save
     if @item
       redirect_to item_path(@item)
-    else 
-      render "edit"
+    else
+      render 'edit'
     end
   end
 
   # items/1 DELETE
-  def destroy; end
+  def destroy
+    @item.destroy
+    reditect_to action: 'index'
+  end
 
   private
 
   def item_params
     params.require(:item).permit(:price, :name, :real, :weight, :description)
+  end
+
+  def find_item
+    @item = Item.find(params[:id])
+  end
+
+  def check_if_admin
+    render plain: 'Access denied', status: 403 unless params[:admin]
   end
 end
