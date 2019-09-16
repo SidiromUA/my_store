@@ -1,3 +1,26 @@
-<% @items.each do |i| %>
-  <p><%= link_to i.name, item_path(i) %></p>
+<h1>Items</h1>
+
+<% if @items.empty? %>
+  <b>No items in store</b>
+<% else %>
+<table class='items'>
+  <tr>
+    <th>item id</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Delete</th>
+    <th>Rating</th>
+  </tr>
+
+  <% @items.each do |i| %>
+    <tr data-item_id='<% i.id %>'>
+      <td><%= i.id %></td>
+      <td><%= link_to i.name, item_path(i) %></td>
+      <td><%= i.price %> грн.</td>
+      <td><%= link_to "Видалити", i, method: :delete, data: {confirm: 'Впевнені?'} %></td>
+      <td><%= i.votes_count %>, <%= link_to '+', upvote_item_path(i) %></td>
+    </tr>
+  <% end %>
+
+</table>
 <% end %>
