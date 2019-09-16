@@ -1,10 +1,16 @@
 class ItemsController < ApplicationController
-  
-  before_action :find_item, only: %i[show edit update destroy]
+
+  before_action :find_item, only: %i[show edit update destroy upvote]
   before_action :check_if_admin, only: %i[edit update new create destroy]
-  
+
   def index
     @items = Item.all
+  end
+
+  def expensive
+    @items = Item.where('price > 1000')
+    #@items = Item.any? { |item| item >= 1000}
+    return 'index'
   end
 
   # items/1 GET
@@ -47,7 +53,12 @@ class ItemsController < ApplicationController
   # items/1 DELETE
   def destroy
     @item.destroy
-    reditect_to action: 'index'
+    redirect_to action: 'index'
+  end
+
+  def upvote
+    @item.increment!(:votes_count)
+    redirect_to action: :index
   end
 
   private
@@ -57,10 +68,7 @@ class ItemsController < ApplicationController
   end
 
   def find_item
-    @item = Item.find(params[:id])
-  end
-
-  def check_if_admin
-    render plain: 'Access denied', status: 403 unless params[:admin]
+    @item = Item.where(id: params[:id]).first
+    render_404 unless @item
   end
 end
