@@ -1,5 +1,6 @@
-class ItemsController < ApplicationController
+# frozen_string_literal: true
 
+class ItemsController < ApplicationController
   before_action :find_item, only: %i[show edit update destroy upvote]
   before_action :check_if_admin, only: %i[edit update new create destroy]
 
@@ -9,7 +10,6 @@ class ItemsController < ApplicationController
 
   def expensive
     @items = Item.where('price > 1000')
-    #@items = Item.any? { |item| item >= 1000}
     return 'index'
   end
 

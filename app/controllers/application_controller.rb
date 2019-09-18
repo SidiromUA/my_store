@@ -1,5 +1,6 @@
-class ApplicationController < ActionController::Base
+# frozen_string_literal: true
 
+class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
@@ -15,5 +16,4 @@ class ApplicationController < ActionController::Base
   def check_if_admin
     render_403 unless params[:admin]
   end
-
 end

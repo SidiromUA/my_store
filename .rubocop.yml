@@ -1,0 +1,31 @@
+AllCops:
+  TargetRubyVersion: 2.4.1
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+    - 'config/initializers/*'
+    - 'spec/**/*'
+    - 'config/environments/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'Rakefile'
+    - 'Guardfile'
+    - 'node_modules/**/*'
+    - 'app/models/user_provider.rb'
+    - 'app/admin/dashboard.rb'
+    - 'app/admin/admin_users.rb'
+    - 'test/**/*'
+    - 'config/puma.rb'
+
+Metrics/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 30
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

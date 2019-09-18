@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -43,6 +43,7 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   gem 'factory_bot'
   gem 'rspec-rails'
+  gem 'rubocop', '~> 0.74.0', require: false
   gem 'selenium-webdriver'
 end
 

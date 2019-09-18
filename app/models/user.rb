@@ -1,8 +1,8 @@
-class User < ApplicationRecord
+# frozen_string_literal: true
 
-  #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+class User < ApplicationRecord
+  # devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_one :cart, autosave: true, dependent: :destroy
   has_many :orders
-
 end

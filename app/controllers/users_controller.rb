@@ -1,11 +1,7 @@
-class UserController < ApplicationController
+# frozen_string_literal: true
 
-  def create
-    @user = User.new(user_params)
-    @user.save
-  end
-
-  private 
+class UsersController < ApplicationController
+  private
 
   def user_params
     params.require(:resource).permit(:login, :email, :password, :password_confirmation, :remember_me)
