@@ -10,14 +10,12 @@ class ItemsController < ApplicationController
 
   def expensive
     @items = Item.where('price > 1000')
-    return 'index'
+    render 'index'
   end
 
   # items/1 GET
   def show
-    unless @item
-      render plain: 'Page is not found', status: 404
-    end
+    render plain: 'Page is not found', status: 404 unless @item
   end
 
   # items/new GET
