@@ -5,4 +5,5 @@ class User < ApplicationRecord
 
   has_one :cart, autosave: true, dependent: :destroy
   has_many :orders
+  has_many :comments
 end
